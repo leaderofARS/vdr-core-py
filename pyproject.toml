@@ -16,12 +16,17 @@ dependencies = [
     "solana>=0.30.0",
     "solders>=0.18.0",
     "httpx>=0.24.0",
+    "fpdf2>=2.7.4",
 ]
 
 [project.optional-dependencies]
 test = [
     "pytest",
     "pytest-asyncio",
+]
+lint = [
+    "flake8",
+    "pylint",
 ]
 
 [tool.hatch.build.targets.wheel]
