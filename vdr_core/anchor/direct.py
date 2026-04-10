@@ -110,4 +110,4 @@ async def anchor_to_solana(options: Dict[str, Any]) -> Dict[str, Any]:
         except Exception as e:
             if isinstance(e, (ValidationError, SolanaConnectionError)):
                 raise e
-            raise TransactionError(f'Failed to broadcast transaction: {str(e)}')
+            raise TransactionError(f'Failed to broadcast transaction: {str(e)}') from e

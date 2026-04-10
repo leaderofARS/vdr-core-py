@@ -87,4 +87,4 @@ async def verify_on_chain(options: Dict[str, Any]) -> Dict[str, Any]:
             }
         except Exception as e:
             if isinstance(e, ValidationError): raise e
-            raise SolanaConnectionError(f"Failed to verify on chain: {str(e)}")
+            raise SolanaConnectionError(f"Failed to verify on chain: {str(e)}") from e
