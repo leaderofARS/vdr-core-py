@@ -1,0 +1,27 @@
+[MASTER]
+# Ignore the .git and __pycache__ directories.
+ignore=.git,__pycache__
+
+[MESSAGES CONTROL]
+# Disable the message, report, category or checker with the given id(s).
+# C0111: missing-docstring
+# C0103: invalid-name
+# R0903: too-few-public-methods
+# W0703: broad-except
+# R0801: duplicate-code
+# W0621: redefined-outer-name (standard in pytest)
+# C0301: line-too-long
+# W0611: unused-import
+disable=C0111,C0103,R0903,W0703,R0801,C0114,C0115,C0116,W0621,C0301,W0611,C0411
+
+[REPORTS]
+# Set the output format.
+output-format=text
+
+[BASIC]
+# Good variable names which should always be accepted, separated by a comma.
+good-names=i,j,k,ex,Run,_,h,f,v,at
+
+[DESIGN]
+# Maximum number of arguments for function / method.
+max-args=7
