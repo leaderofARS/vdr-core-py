@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vdr-core"
+version = "0.1.0"
+description = "SipHeron VDR-CORE Official Python SDK. Cryptographically anchor documents to Solana."
+authors = [
+    { name = "SipHeron VDR", email = "dev@sipheron.com" }
+]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "solana>=0.30.0",
+    "solders>=0.18.0",
+    "httpx>=0.24.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["vdr_core"]

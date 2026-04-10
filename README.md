@@ -10,19 +10,19 @@ The official Python SDK for the **SipHeron Verified Document Registry (VDR)**. C
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-- 🔒 **Local Hashing**: Securely compute SHA-256 document fingerprints within your own environment.
-- ⛓️ **Blockchain Anchoring**: Record document hashes on the Solana blockchain for permanent, tamper-proof proof of existence.
-- 📉 **Version Control**: Manage document lifecycles with anchor superseding and revocation.
-- ✅ **Verification**: Instantly check document authenticity against on-chain records.
-- 📄 **Integrity Reports**: Generate professional PDF reports with embedded cryptographic proofs.
-- 🤖 **AI Pipeline Compliance**: Anchor AI events (retrieval, generation, PII filtering) for auditability.
-- 🏆 **Certificates**: Generate verifiable certificates of anchoring.
+- **Local Hashing**: Securely compute SHA-256 document fingerprints within your own environment.
+- **Blockchain Anchoring**: Record document hashes on the Solana blockchain for permanent, tamper-proof proof of existence.
+- **Version Control**: Manage document lifecycles with anchor superseding and revocation.
+- **Verification**: Instantly check document authenticity against on-chain records.
+- **Integrity Reports**: Generate professional PDF reports with embedded cryptographic proofs.
+- **AI Pipeline Compliance**: Anchor AI events (retrieval, generation, PII filtering) for auditability.
+- **Certificates**: Generate verifiable certificates of anchoring.
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 pip install vdr-core
@@ -36,7 +36,7 @@ pip install vdr-core
 
 ---
 
-## 🏁 Quick Start
+## Quick Start
 
 ```python
 import asyncio
@@ -47,7 +47,7 @@ async def main():
     # Generate your API key at https://app.sipheron.com
     client = SipHeron({
         "apiKey": "your_api_key_here",
-        "network": "devnet" # or 'mainnet-beta'
+        "network": "devnet" # or 'mainnet'
     })
 
     # 2. Hash a document locally
@@ -77,14 +77,14 @@ if __name__ == "__main__":
 
 ---
 
-## 🛠️ Detailed Usage
+## Detailed Usage
 
 ### Client Configuration
 
 | Option | Type | Description |
 | :--- | :--- | :--- |
 | `apiKey` | `string` | Your SipHeron API Key (Required for Mainnet). |
-| `network` | `string` | `devnet` (default) or `mainnet-beta`. |
+| `network` | `string` | `devnet` (default) or `mainnet`. |
 | `baseUrl` | `string` | Override the API endpoint (useful for private instances). |
 
 ```python
@@ -164,7 +164,7 @@ await client.pipeline.anchor_event({
 
 ---
 
-## 🛡️ Error Handling
+## Error Handling
 
 The SDK includes specific exceptions for robust error handling:
 
@@ -176,7 +176,7 @@ The SDK includes specific exceptions for robust error handling:
 
 ---
 
-## 🧪 Development & Testing
+## Development & Testing
 
 We use `pytest` for all unit and integration tests.
 
@@ -190,13 +190,13 @@ pytest
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
