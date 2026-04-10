@@ -92,11 +92,11 @@ class SipHeron:
                 err_data = e.response.json()
                 msg = err_data.get('error', str(e))
                 code = err_data.get('code', 'API_ERROR')
-                raise SipHeronError(msg, code, e.response.status_code)
-            except (json.JSONDecodeError, KeyError):
-                raise SipHeronError(str(e), 'HTTP_ERROR', e.response.status_code)
+                raise SipHeronError(msg, code, e.response.status_code) from e
+            except (json.JSONDecodeError, KeyError) as exc:
+                raise SipHeronError(str(e), 'HTTP_ERROR', e.response.status_code) from exc
         except httpx.RequestError as e:
-            raise NetworkError(f"Network request failed: {str(e)}", e)
+            raise NetworkError(f"Network request failed: {str(e)}", e) from e
 
     async def anchor(self, options: AnchorOptions) -> Dict[str, Any]:
         """

@@ -69,7 +69,7 @@ async def prepare_anchor(options: Dict[str, Any]) -> Dict[str, Any]:
     else:
         h = normalize_hash(options['hash'])
         if not is_valid_hash(h, algorithm):
-             raise ValidationError(f'Invalid hash format for {algorithm}.')
+            raise ValidationError(f'Invalid hash format for {algorithm}.')
              
     return {
         'hash': h,

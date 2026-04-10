@@ -63,9 +63,9 @@ async def hash_stream(stream, options: dict = None) -> str:
     hasher = hashlib.sha256()
     for chunk in stream:
         if isinstance(chunk, str):
-             hasher.update(chunk.encode('utf-8'))
+            hasher.update(chunk.encode('utf-8'))
         else:
-             hasher.update(chunk)
+            hasher.update(chunk)
     return hasher.hexdigest()
 
 async def hash_base64(b64_string: str, options: dict = None) -> str:
@@ -78,7 +78,7 @@ async def hash_base64(b64_string: str, options: dict = None) -> str:
     try:
         buffer = base64.b64decode(b64_string)
     except Exception as e:
-        raise ValidationError(f"Invalid base64 string: {str(e)}")
+        raise ValidationError(f"Invalid base64 string: {str(e)}") from e
         
     return await hash_document(buffer, options)
 
