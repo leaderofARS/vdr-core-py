@@ -12,11 +12,15 @@ ignore=.git,__pycache__
 # W0621: redefined-outer-name (standard in pytest)
 # C0301: line-too-long
 # W0611: unused-import
-disable=C0111,C0103,R0903,W0703,R0801,C0114,C0115,C0116,W0621,C0301,W0611,C0411
+disable=C0111,C0103,R0903,W0703,R0801,C0114,C0115,C0116,W0621,C0301,W0611,C0411,C0415
 
 [REPORTS]
 # Set the output format.
 output-format=text
+
+[TYPECHECK]
+# List of module names for which member attributes should not be checked
+ignored-modules=django.http,fastapi
 
 [BASIC]
 # Good variable names which should always be accepted, separated by a comma.

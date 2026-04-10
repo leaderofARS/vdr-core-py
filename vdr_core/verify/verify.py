@@ -37,7 +37,7 @@ async def verify_locally(file_or_hash: Union[bytes, str], anchor_hash: str) -> D
     }
 
 async def verify_hash_standalone(
-    hash_str: str, 
+    hash_str: str,
     api_base_url: str = 'https://api.sipheron.com'
 ) -> Dict[str, Any]:
     """
@@ -61,7 +61,7 @@ async def verify_hash_standalone(
             resp.raise_for_status()
             data = resp.json()
         except httpx.RequestError as e:
-            raise NetworkError(f"Failed to connect to verification API: {str(e)}", e)
+            raise NetworkError(f"Failed to connect to verification API: {str(e)}", e) from e
         except httpx.HTTPStatusError as e:
             data = e.response.json() if e.response.status_code != 404 else {'status': 'NOT_FOUND'}
 

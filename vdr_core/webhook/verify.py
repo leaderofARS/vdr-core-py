@@ -6,6 +6,13 @@ from typing import Dict, Any, Optional
 
 from ..errors import SipHeronError, ValidationError
 
+def _parse_signature(signature: str):
+    """Internal helper to parse t=... and v1=... from signature header."""
+    parts = signature.split(',')
+    timestamp_str = next((p[2:] for p in parts if p.startswith('t=')), None)
+    hash_val = next((p[3:] for p in parts if p.startswith('v1=')), None)
+    return timestamp_str, hash_val
+
 def verify_webhook_signature(params: Dict[str, Any]) -> Dict[str, Any]:
     """
     Verify a SipHeron webhook signature header.
@@ -22,17 +29,13 @@ def verify_webhook_signature(params: Dict[str, Any]) -> Dict[str, Any]:
     if not payload or not signature or not secret:
         return {'valid': False, 'expired': False}
 
-    parts = signature.split(',')
-    timestamp_str = next((p[2:] for p in parts if p.startswith('t=')), None)
-    hash_val = next((p[3:] for p in parts if p.startswith('v1=')), None)
-
+    timestamp_str, hash_val = _parse_signature(signature)
     timestamp = int(timestamp_str) if timestamp_str else 0
     if not timestamp_str and not hash_val:
         timestamp = int(time.time())
 
     actual_hash = hash_val or signature
     age = int(time.time()) - timestamp
-    
     expired = age > tolerance if timestamp_str else False
 
     if expired and options.get('throwOnExpired'):
@@ -41,17 +44,15 @@ def verify_webhook_signature(params: Dict[str, Any]) -> Dict[str, Any]:
     payload_str = payload.decode('utf-8') if isinstance(payload, bytes) else payload
 
     if timestamp_str:
-        expected_hash = hmac.new(
-            secret.encode('utf-8'),
-            f"{timestamp}.{payload_str}".encode('utf-8'),
-            hashlib.sha256
-        ).hexdigest()
+        msg = f"{timestamp}.{payload_str}"
     else:
-        expected_hash = hmac.new(
-            secret.encode('utf-8'),
-            payload_str.encode('utf-8'),
-            hashlib.sha256
-        ).hexdigest()
+        msg = payload_str
+
+    expected_hash = hmac.new(
+        secret.encode('utf-8'),
+        msg.encode('utf-8'),
+        hashlib.sha256
+    ).hexdigest()
 
     valid = hmac.compare_digest(actual_hash.encode('utf-8'), expected_hash.encode('utf-8'))
 
